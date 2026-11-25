@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kosmische Kasse – AstralWunder</title><link rel="icon" href="images/kristall.svg"><link rel="stylesheet" href="style.css">
+<style>
+.wrap{max-width:1000px;margin:auto;padding:2rem 5%;display:grid;grid-template-columns:1.5fr 1fr;gap:2rem}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}}
+.box{background:var(--card);border-radius:18px;padding:1.5rem;border:1px solid #ffffff1a}
+.box h3{color:var(--gold);margin-bottom:1rem}
+label{display:block;font-size:.85rem;margin:.8rem 0 .3rem;opacity:.85}
+input,select{width:100%;padding:.7rem;border-radius:10px;border:1px solid #ffffff33;background:#12061f;color:var(--text);font-family:inherit;font-size:1rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.pay{display:grid;gap:.6rem}.pay label{display:flex;gap:.7rem;align-items:center;background:#12061f;padding:.8rem;border-radius:10px;border:1px solid #ffffff22;cursor:pointer;margin:0}
+.pay input{width:auto}
+.sum div{display:flex;justify-content:space-between;padding:.35rem 0;font-size:.9rem;border-bottom:1px dashed #ffffff1a}
+.sum .total{font-size:1.3rem;color:var(--gold);font-weight:bold;border:0;margin-top:.5rem}
+.steps{display:flex;justify-content:center;gap:1rem;padding:2rem 5% 0;flex-wrap:wrap;font-size:.9rem}.steps span{opacity:.5}.steps .on{opacity:1;color:var(--gold)}
+#overlay{position:fixed;inset:0;background:#0a0314f2;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:99;text-align:center;padding:2rem}
+#overlay.open{display:flex}
+.orb{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#9b6dff 40%,#2a0845);box-shadow:0 0 60px #9b6dff;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);box-shadow:0 0 110px var(--pink)}}
+#status{margin-top:2rem;font-size:1.2rem;min-height:3.5rem;max-width:560px}
+.bar{width:min(420px,90%);height:12px;background:#ffffff22;border-radius:10px;margin-top:1.5rem;overflow:hidden}.bar div{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--pink));transition:width .8s}
+.fail{display:none;margin-top:1.5rem}.fail h2{color:#ff6b6b;font-size:2.2rem;margin-bottom:.5rem}
+.fail .code{font-family:monospace;background:#000;padding:.6rem 1rem;border-radius:8px;display:inline-block;margin:1rem 0;color:#7df9ff}
+.shake{animation:shake .5s}@keyframes shake{25%{transform:translateX(-12px)}75%{transform:translateX(12px)}}
+</style></head><body>
+<header><a class="logo" href="index.html">🔮 Astral<b>Wunder</b></a><nav><a href="index.html">← Zurück zum Shop</a><a href="faq.html">FAQ</a></nav><span class="cart-btn">🛒 <span id="cartCount">0</span></span></header>
+<div class="steps"><span>1. Warenkorb ✔</span><span class="on">2. Kosmische Kasse</span><span>3. Erleuchtung</span><span>4. ??? </span></div>
+<form class="wrap" id="form">
+<div>
+<div class="box"><h3>🌠 Deine Daten</h3>
+<div class="two"><div><label>Vorname</label><input required placeholder="z. B. Sternenkind"></div><div><label>Nachname im aktuellen Leben</label><input required placeholder="z. B. Müller"></div></div>
+<label>Sternzeichen (Pflichtfeld, wir prüfen die Kompatibilität)</label>
+<select required><option value="">Bitte wählen…</option><option>Widder</option><option>Stier</option><option>Zwillinge</option><option>Krebs</option><option>Löwe</option><option>Jungfrau</option><option>Waage</option><option>Skorpion (Achtung: Aufpreis)</option><option>Schütze</option><option>Steinbock</option><option>Wassermann</option><option>Fische</option><option>Schlangenträger (Insider)</option></select>
+<label>Lieferadresse (irdisch)</label><input placeholder="Straße, Hausnummer">
+<label>Lieferadresse (astral, optional)</label><input placeholder="z. B. Plejaden, 3. Ebene links">
+<label>Aura-Farbe</label><input type="color" value="#9b6dff" style="height:45px;padding:.2rem">
+</div>
+<div class="box" style="margin-top:1.5rem"><h3>💳 Zahlungsart</h3><div class="pay">
+<label><input type="radio" name="p" checked> ✨ Karma-Punkte (Kurs: 1 Punkt = 0,0003 €)</label>
+<label><input type="radio" name="p"> 🌙 Mondgold (nur bei Vollmond akzeptiert)</label>
+<label><input type="radio" name="p"> 🧘 Bezahlen durch positive Gedanken</label>
+<label><input type="radio" name="p"> 🦎 Reptiloiden-Kreditkarte</label>
+<label><input type="radio" name="p"> 🪙 AstralCoin (Kurs gechannelt)</label>
+</div>
+<label style="margin-top:1rem"><input type="checkbox" required style="width:auto"> Ich habe die <a href='agb.html' target='_blank' style='text-decoration:underline'>AGB</a> in einem früheren Leben gelesen und akzeptiere sie.</label>
+<label><input type="checkbox" style="width:auto" checked> Ja, schickt mir täglich Nachrichten per Telepathie.</label>
+</div></div>
+<div><div class="box sum"><h3>🧾 Zusammenfassung</h3>
+<div><span id="items">0 Artikel</span><span id="sub">0,00 €</span></div>
+<div><span>Karma-Steuer (19 %)</span><span id="tax">0,00 €</span></div>
+<div><span>Energetische Aufladung</span><span>13,13 €</span></div>
+<div><span>Versand per Astralreise</span><span>gratis*</span></div>
+<div><span>Chakra-Rabatt</span><span style="color:#7df9ff">−3,33 €</span></div>
+<div class="total"><span>Gesamt</span><span id="total">0,00 €</span></div>
+<p style="font-size:.75rem;opacity:.6;margin-top:.5rem">*Reisezeit 3–5 Inkarnationen. Rückgabe nur in der nächsten Dimension.</p>
+<div class="coupon" style="margin-top:1rem"><label>🎟️ Gutscheincode</label><div style="display:flex;gap:.5rem"><input id="coupon" placeholder="z. B. WAHRHEIT33"><button type="button" class="btn" id="applyCoupon" style="padding:.6rem 1rem;white-space:nowrap">Einlösen</button></div><p id="couponMsg" style="font-size:.85rem;margin-top:.5rem;min-height:1.2rem"></p></div>
+<button class="btn" style="width:100%;margin-top:1rem">🔮 Kostenpflichtig erleuchten</button>
+</div></div>
+</form>
+<div id="overlay"><div class="orb" id="orb"></div><div id="status">Verbinde mit dem Kosmos…</div><div class="bar"><div id="bar"></div></div>
+<div class="fail" id="fail"><h2>❌ ZAHLUNG ENERGETISCH ABGELEHNT</h2><p id="reason"></p><div class="code" id="code"></div><br>
+<button class="btn" onclick="location.reload()">Nochmal versuchen (wird wieder scheitern)</button>
+<p style="margin-top:1rem"><a href="index.html" style="text-decoration:underline">Zurück in den Shop</a></p></div></div>
+<footer><p style="margin:.5rem 0"><a href="agb.html#agb" style="text-decoration:underline">AGB</a> · <a href="agb.html#impressum" style="text-decoration:underline">Impressum</a> · <a href="agb.html#agb" style="text-decoration:underline">Datenschutz (Dinkelkekse)</a></p><p class="disclaimer">⚠️ SATIRE: Hier wird nichts bezahlt, nichts gespeichert und nichts verschickt. Gib bitte keine echten Daten ein.</p></footer>
+<script src="products.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+function getCart(){try{return +localStorage.getItem("astralCart")||0}catch(e){return 0}}
+const list=(typeof PRODUCTS!=="undefined"&&PRODUCTS.length)?PRODUCTS:[{price:77.77}];
+const n=getCart()||1,avg=list.reduce((a,p)=>a+p.price,0)/list.length,sub=n*avg,tax=sub*.19,eur=v=>v.toFixed(2).replace(".",",")+" €";
+$("cartCount").textContent=n;$("items").textContent=n+" Artikel";$("sub").textContent=eur(sub);$("tax").textContent=eur(tax);$("total").textContent=eur(sub+tax+13.13-3.33);
+const steps=["Verbinde mit dem Kosmos…","Prüfe Kompatibilität deines Sternzeichens…","Scanne Aura auf Restschulden aus früheren Leben…","Frage die Plejadier um Erlaubnis…","Synchronisiere mit dem Mondkalender…","Berechne Karma-Wechselkurs…","Warte auf Zustimmung von Meister Horst…","⚠️ Störung im Energiefeld erkannt…"];
+const reasons=["Merkur ist rückläufig. Alle Transaktionen sind bis auf Weiteres eingefroren.","Deine Aura hat die Bonitätsprüfung nicht bestanden.","Die Reptiloiden haben die Zahlung abgefangen. Wir arbeiten daran (nicht wirklich).","Dein Sternzeichen verträgt sich nicht mit unserem Kassensystem.","Deine Schwingung liegt 4 Hertz unter dem Mindestbestellwert.","Das Universum hat entschieden, dass du das nicht brauchst."];
+$("form").addEventListener("submit",e=>{e.preventDefault();$("overlay").classList.add("open");let i=0;const t=setInterval(()=>{$("status").textContent=steps[i];$("bar").style.width=Math.min(97,(i+1)/steps.length*100)+"%";i++;if(i>=steps.length){clearInterval(t);setTimeout(()=>{const o=$("orb");o.style.background="radial-gradient(circle at 35% 30%,#fff,#ff4d4d 40%,#300)";o.style.animation="none";o.classList.add("shake");$("status").textContent="Fortschritt: 99,9 % … dann war das Universum dagegen.";$("reason").textContent=reasons[Math.floor(Math.random()*reasons.length)];$("code").textContent="Fehlercode: KARMA-"+Math.floor(Math.random()*900+100)+"-ΩMEGA";$("fail").style.display="block"},1200)}},1100)});
+
+(function(){const special={"WAHRHEIT33":"❌ Dieser Code wurde von der Regierung deaktiviert. Wir wissen auch nicht, wie sie ihn gefunden haben.","GRATIS":"❌ Nichts im Universum ist gratis. Außer Luft. Und die kostet bei uns bald auch.","ALUHUT":"❌ Der Code konnte nicht gelesen werden, weil er von einem Aluhut abgeschirmt wird.","HORST":"❌ Meister Horst hat diesen Code persönlich verboten. Er meditiert gerade darüber, warum.","5G":"❌ Verdächtiger Code! Wir haben deine IP an die Echsenmenschen gemeldet (nicht wirklich)."};
+const generic=["❌ Code abgelehnt: Merkur ist rückläufig.","❌ Dieser Code ist nur in einer anderen Zeitlinie gültig.","❌ Der Code schwingt nicht im richtigen Frequenzbereich (432 Hz erforderlich).","❌ Code abgelaufen. Er war nur in deinem letzten Leben gültig.","❌ Code zu negativ. Bitte versuche einen fröhlicheren Code.","❌ Dein Sternzeichen ist von dieser Aktion ausgeschlossen.","❌ Code bereits von einem Plejadier eingelöst."];
+const tries={n:0};const btn=document.getElementById("applyCoupon"),inp=document.getElementById("coupon"),msg=document.getElementById("couponMsg");if(!btn)return;
+function apply(){const c=inp.value.trim().toUpperCase();tries.n++;msg.style.color="#ff6b6b";
+if(!c){msg.textContent="❌ Ein leerer Code ist zwar sehr zen, aber leider ungültig.";return}
+if(tries.n>=5){msg.textContent="🚫 Zu viele Versuche. Deine Aura wurde für 3 Inkarnationen gesperrt.";btn.disabled=true;btn.style.opacity=.4;return}
+msg.textContent="🔮 Prüfe Code mit dem Universum…";msg.style.color="#ffd700";
+setTimeout(()=>{msg.style.color="#ff6b6b";msg.textContent=special[c]||generic[Math.floor(Math.random()*generic.length)]},1300)}
+btn.addEventListener("click",apply);inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();apply()}})})();
+</script><script src="cookies.js"></script><script src="chat.js"></script></body></html>
